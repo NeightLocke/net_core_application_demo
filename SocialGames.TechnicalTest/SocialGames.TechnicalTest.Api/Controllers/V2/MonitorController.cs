@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SocialGames.TechnicalTest.Api.Controllers.V1
+namespace SocialGames.TechnicalTest.Api.Controllers.V2
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion("1")]
+    [ApiVersion("2")]
     public class MonitorController : ControllerBase
     {
         [HttpGet]
-        [MapToApiVersion("1")]
+        [MapToApiVersion("2")]
         [Route("Heartbeat")]
         public IActionResult Heartbeat()
         {
-            return Ok(string.Format(nameof(MonitorController) + "_v1"));
+            return Ok(string.Format(nameof(MonitorController) + "_v2"));
         }
 
         [HttpGet]
-        [MapToApiVersion("1")]
+        [MapToApiVersion("2")]
         [Route("Ping")]
         public IActionResult Ping()
         {
