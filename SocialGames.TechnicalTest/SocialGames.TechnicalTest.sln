@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialGames.TechnicalTest.Api", "SocialGames.TechnicalTest.Api\SocialGames.TechnicalTest.Api.csproj", "{ACCC1D5E-F96E-4E9E-A8F8-70CC4BE623EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialGames.TechnicalTest.ApiService", "SocialGames.TechnicalTest.ApiService\SocialGames.TechnicalTest.ApiService.csproj", "{18C6B584-CD1B-493E-B8EB-83E3D3FDB664}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialGames.TechnicalTest.Games", "SocialGames.TechnicalTest.Games\SocialGames.TechnicalTest.Games.csproj", "{AF049DC9-03FB-42FD-953D-83B57D247169}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialGames.TechnicalTest.ApiService", "SocialGames.TechnicalTest.ApiService\SocialGames.TechnicalTest.ApiService.csproj", "{43B22F15-F271-4C83-870B-50CED625403D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{ACCC1D5E-F96E-4E9E-A8F8-70CC4BE623EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACCC1D5E-F96E-4E9E-A8F8-70CC4BE623EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACCC1D5E-F96E-4E9E-A8F8-70CC4BE623EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18C6B584-CD1B-493E-B8EB-83E3D3FDB664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18C6B584-CD1B-493E-B8EB-83E3D3FDB664}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18C6B584-CD1B-493E-B8EB-83E3D3FDB664}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18C6B584-CD1B-493E-B8EB-83E3D3FDB664}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF049DC9-03FB-42FD-953D-83B57D247169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF049DC9-03FB-42FD-953D-83B57D247169}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF049DC9-03FB-42FD-953D-83B57D247169}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF049DC9-03FB-42FD-953D-83B57D247169}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43B22F15-F271-4C83-870B-50CED625403D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B22F15-F271-4C83-870B-50CED625403D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B22F15-F271-4C83-870B-50CED625403D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B22F15-F271-4C83-870B-50CED625403D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,14 +1,9 @@
-﻿using LightInject;
-
-namespace SocialGames.TechnicalTest.Api
+﻿namespace SocialGames.TechnicalTest.Api
 {
     public class GamesBootstrapper
     {
-        IServiceContainer _serviceContainer;
-
-        public GamesBootstrapper(IServiceContainer container)
+        public GamesBootstrapper()
         {
-            _serviceContainer = container;
         }
 
         public void Run()
@@ -18,7 +13,6 @@ namespace SocialGames.TechnicalTest.Api
 
         protected void RegisterServices()
         {
-
         }
     }
 }
