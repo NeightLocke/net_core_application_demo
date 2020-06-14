@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace SocialGames.TechnicalTest.Api.Controllers.V1
 {
@@ -7,12 +9,28 @@ namespace SocialGames.TechnicalTest.Api.Controllers.V1
     [ApiVersion("1")]
     public class MonitorController : ControllerBase
     {
+        private readonly ILogger<MonitorController> _logger;
+
+        public MonitorController(ILogger<MonitorController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet]
         [MapToApiVersion("1")]
         [Route("Heartbeat")]
         public IActionResult Heartbeat()
         {
-            return Ok(string.Format(nameof(MonitorController) + "_v1"));
+            _logger.LogInformation(nameof(Heartbeat));
+            try
+            {
+                return Ok(string.Format(nameof(MonitorController) + "_v1"));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
         }
 
         [HttpGet]
@@ -20,7 +38,16 @@ namespace SocialGames.TechnicalTest.Api.Controllers.V1
         [Route("Ping")]
         public IActionResult Ping()
         {
-            return Ok("Pong");
+            _logger.LogInformation(nameof(Ping));
+            try
+            {
+                return Ok("Pong");
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
         }
     }
 }

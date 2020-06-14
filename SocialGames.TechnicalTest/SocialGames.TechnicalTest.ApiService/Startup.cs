@@ -14,13 +14,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using SocialGames.TechnicalTest.ApiService.Extensions;
 
 namespace SocialGames.TechnicalTest.ApiService
 {
     public class Startup
     {
-        private static string ApiName = typeof(Startup).Assembly.GetName().Name;
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,16 +30,10 @@ namespace SocialGames.TechnicalTest.ApiService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddMvc(c => c.Conventions.Add(new ApiExplorerGroupPerVersionConvention()))
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(c => c.Conventions.Add(new ApiExplorerGroupPerVersionConvention()))
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddApiVersioning();
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = string.Format(ApiName + "_v1"), Version = "v1" });
-                c.SwaggerDoc("v2", new OpenApiInfo { Title = string.Format(ApiName + "_v2"), Version = "v2" });
-            });
+            services.AddCustomSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,13 +42,7 @@ namespace SocialGames.TechnicalTest.ApiService
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", string.Format(ApiName + "_v1"));
-                    c.SwaggerEndpoint("/swagger/v2/swagger.json", string.Format(ApiName + "_v2"));
-                    c.DisplayOperationId();
-                    c.DisplayRequestDuration();
-                });
+                app.AddCustomSwaggerUI();
                 app.UseDeveloperExceptionPage();
             }
             else
