@@ -15,11 +15,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using SocialGames.TechnicalTest.ApiService.Extensions;
+using SocialGames.TechnicalTest.Games.Extensions;
 
 namespace SocialGames.TechnicalTest.ApiService
 {
     public class Startup
     {
+        private static string _apiName = typeof(Startup).Assembly.GetName().Name;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,7 +36,8 @@ namespace SocialGames.TechnicalTest.ApiService
             services.AddMvc(c => c.Conventions.Add(new ApiExplorerGroupPerVersionConvention()))
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddApiVersioning();
-            services.AddCustomSwagger();
+            services.AddCustomSwagger(_apiName);
+            services.AddCustomServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +46,7 @@ namespace SocialGames.TechnicalTest.ApiService
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
-                app.AddCustomSwaggerUI();
+                app.AddCustomSwaggerUI(_apiName);
                 app.UseDeveloperExceptionPage();
             }
             else

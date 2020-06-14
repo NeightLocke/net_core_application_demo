@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialGames.TechnicalTest.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialGames.TechnicalTest.Games", "SocialGames.TechnicalTest.Games\SocialGames.TechnicalTest.Games.csproj", "{AF049DC9-03FB-42FD-953D-83B57D247169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialGames.TechnicalTest.ApiService", "SocialGames.TechnicalTest.ApiService\SocialGames.TechnicalTest.ApiService.csproj", "{43B22F15-F271-4C83-870B-50CED625403D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialGames.TechnicalTest.ApiService", "SocialGames.TechnicalTest.ApiService\SocialGames.TechnicalTest.ApiService.csproj", "{43B22F15-F271-4C83-870B-50CED625403D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Presentation", "{564CEE3B-3D6C-49B3-9EE2-921E089BA5DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Business", "2. Business", "{21A83553-D21D-4C86-AF41-C9F1826A09FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +34,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ACCC1D5E-F96E-4E9E-A8F8-70CC4BE623EA} = {564CEE3B-3D6C-49B3-9EE2-921E089BA5DB}
+		{AF049DC9-03FB-42FD-953D-83B57D247169} = {21A83553-D21D-4C86-AF41-C9F1826A09FD}
+		{43B22F15-F271-4C83-870B-50CED625403D} = {564CEE3B-3D6C-49B3-9EE2-921E089BA5DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D43452E-92C3-44C5-BE01-F49728FF8B64}

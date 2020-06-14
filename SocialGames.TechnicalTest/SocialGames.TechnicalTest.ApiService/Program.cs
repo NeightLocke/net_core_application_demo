@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
+using SocialGames.TechnicalTest.Games.Extensions;
 
 namespace SocialGames.TechnicalTest.ApiService
 {
@@ -31,26 +32,22 @@ namespace SocialGames.TechnicalTest.ApiService
             })
             .ConfigureLogging((webhostingContext, logging) =>
             {
-                var pathLogBase = webhostingContext.Configuration["PathLogBase"];
-                var normalLogSufix = webhostingContext.Configuration["NormalLogSufix"];
-                var errorsLogSufix = webhostingContext.Configuration["ErrorsLogSufix"];
-                var defaultExtensionFile = webhostingContext.Configuration["DefaultExtensionFile"];
-
-                var minimumLevel = webhostingContext.Configuration.GetValue<string>("Serilog:MinimumLevel:Default");
+                var loggingVariables = webhostingContext.Configuration.AddCustomLoggingVariablesExtension();
+                var minimumLevel = Enum.Parse<Serilog.Events.LogEventLevel>(loggingVariables.MinimumLevel);
 
                 Log.Logger = new LoggerConfiguration()
                     .ReadFrom.Configuration(webhostingContext.Configuration)
                     .WriteTo.Map(
-                        keyPropertyName: normalLogSufix,
+                        keyPropertyName: loggingVariables.NormalLogSufix,
                         defaultKey: string.Empty,
-                        configure: (name, wt) => wt.File(string.Format(pathLogBase + "-" + normalLogSufix + defaultExtensionFile), LogEventLevel.Information),
+                        configure: (name, wt) => wt.File(string.Format(loggingVariables.PathLogBase + "-" + loggingVariables.NormalLogSufix + loggingVariables.DefaultExtensionFile), minimumLevel),
                         sinkMapCountLimit: null,
                         restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
                         levelSwitch: null)
                     .WriteTo.Map(
-                        keyPropertyName: errorsLogSufix,
+                        keyPropertyName: loggingVariables.ErrorsLogSufix,
                         defaultKey: string.Empty,
-                        configure: (name, wt) => wt.File(string.Format(pathLogBase + "-" + errorsLogSufix + defaultExtensionFile), LogEventLevel.Error),
+                        configure: (name, wt) => wt.File(string.Format(loggingVariables.PathLogBase + "-" + loggingVariables.ErrorsLogSufix + loggingVariables.DefaultExtensionFile), LogEventLevel.Error),
                         sinkMapCountLimit: null,
                         restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error,
                         levelSwitch: null)
