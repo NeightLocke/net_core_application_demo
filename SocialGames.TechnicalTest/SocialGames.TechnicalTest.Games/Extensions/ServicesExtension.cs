@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using SocialGames.TechnicalTest.Games.Implementations;
+using SocialGames.TechnicalTest.Games.Interface;
 
 namespace SocialGames.TechnicalTest.Games.Extensions
 {
@@ -10,6 +9,8 @@ namespace SocialGames.TechnicalTest.Games.Extensions
     {
         public static IServiceCollection AddCustomServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSingleton<IValidatorProvider, WebApiValidator>();
+            services.AddSingleton<IWebApiServiceConfigurationLibrary, WebApiServiceConfigurationLibrary>();
             return services;
         }
     }

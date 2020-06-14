@@ -1,4 +1,4 @@
-﻿namespace SocialGames.TechnicalTest.Games.Model
+﻿namespace SocialGames.TechnicalTest.Games.DTOs
 {
     public class CharIndex
     {

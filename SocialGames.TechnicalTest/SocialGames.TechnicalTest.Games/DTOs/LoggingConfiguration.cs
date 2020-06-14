@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SocialGames.TechnicalTest.Games.Model
+﻿namespace SocialGames.TechnicalTest.Games.DTOs
 {
     public class LoggingConfiguration
     {
