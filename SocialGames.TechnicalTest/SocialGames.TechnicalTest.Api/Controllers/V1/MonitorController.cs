@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace SocialGames.TechnicalTest.Api.Controllers.V1
 {
@@ -7,6 +8,13 @@ namespace SocialGames.TechnicalTest.Api.Controllers.V1
     [ApiVersion("1")]
     public class MonitorController : ControllerBase
     {
+        private readonly ILogger<MonitorController> _logger;
+
+        public MonitorController(ILogger<MonitorController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet]
         [MapToApiVersion("1")]
         [Route("Heartbeat")]
