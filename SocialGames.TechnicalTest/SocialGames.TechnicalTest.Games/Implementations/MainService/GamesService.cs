@@ -22,8 +22,7 @@ namespace SocialGames.TechnicalTest.Games.Implementations.MainService
 
         public async Task<GamesResponse> EvaluateGamesAsync(GamesRequest request)
         {
-            var p = await _gamesServiceProxyClient.EvaluateGamesAsync(request);
-            return p;
+            return await _gamesServiceProxyClient.EvaluateGamesAsync(request);
         }
     }
 }

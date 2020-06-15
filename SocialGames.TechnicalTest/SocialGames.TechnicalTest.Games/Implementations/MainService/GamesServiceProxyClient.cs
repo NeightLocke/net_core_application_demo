@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SocialGames.TechnicalTest.Games.DTOs;
 using SocialGames.TechnicalTest.Games.DTOs.Request;
 using SocialGames.TechnicalTest.Games.DTOs.Responses;
@@ -24,7 +25,21 @@ namespace SocialGames.TechnicalTest.Games.Implementations.MainService
 
         public async Task<GamesResponse> EvaluateGamesAsync(GamesRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var p = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                var r = await _client.PostAsync("/api/GamesData/Evaluate", p);
+                if (r.IsSuccessStatusCode)
+                {
+                    var jsonString = await r.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<GamesResponse>(jsonString);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

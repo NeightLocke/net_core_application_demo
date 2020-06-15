@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 
 namespace SocialGames.TechnicalTest.Games.Implementations.ExternalServices
 {
@@ -19,6 +20,7 @@ namespace SocialGames.TechnicalTest.Games.Implementations.ExternalServices
             {
                 GamesDataCollection = charIndexCollection
             };
+            Thread.Sleep(5000);
             return response;
         }
     }
