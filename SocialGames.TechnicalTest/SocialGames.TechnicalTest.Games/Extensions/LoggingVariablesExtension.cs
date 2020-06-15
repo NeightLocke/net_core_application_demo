@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SocialGames.TechnicalTest.Games.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using SocialGames.TechnicalTest.Games.DTOs;
 
 namespace SocialGames.TechnicalTest.Games.Extensions
 {

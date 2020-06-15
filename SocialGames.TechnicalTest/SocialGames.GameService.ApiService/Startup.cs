@@ -1,14 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SocialGames.TechnicalTest.ApiService.Extensions;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using SocialGames.TechnicalTest.Games.Extensions;
 
-namespace SocialGames.TechnicalTest.ApiService
+namespace SocialGames.GameService.ApiService
 {
     public class Startup
     {
@@ -24,11 +29,13 @@ namespace SocialGames.TechnicalTest.ApiService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(c => c.Conventions.Add(new ApiExplorerGroupPerVersionConvention()))
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddApiVersioning();
-            services.AddCustomSwagger(_apiName);
-            services.AddCustomMainServiceLibraries(Configuration);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = _apiName, Version = "v1" });
+            });
+            services.AddCustomGamesDataServiceLibrary(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +44,10 @@ namespace SocialGames.TechnicalTest.ApiService
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
-                app.AddCustomSwaggerUI(_apiName);
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint($"/swagger/v1/swagger.json", $"v1");
+                });
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -47,17 +57,6 @@ namespace SocialGames.TechnicalTest.ApiService
 
             app.UseHttpsRedirection();
             app.UseMvc();
-        }
-
-        private class ApiExplorerGroupPerVersionConvention : IControllerModelConvention
-        {
-            public void Apply(ControllerModel controller)
-            {
-                var controllerNamespace = controller.ControllerType.Namespace; // e.g. "Controllers.v1"
-                var apiVersion = controllerNamespace?.Split('.').Last().ToLower();
-
-                controller.ApiExplorer.GroupName = apiVersion;
-            }
         }
     }
 }

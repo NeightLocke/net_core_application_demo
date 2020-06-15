@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Events;
 using SocialGames.TechnicalTest.Games.Extensions;
 
-namespace SocialGames.TechnicalTest.ApiService
+namespace SocialGames.GameService.ApiService
 {
     public class Program
     {
@@ -38,13 +41,6 @@ namespace SocialGames.TechnicalTest.ApiService
                         configure: (name, wt) => wt.File(string.Format(loggingVariables.PathLogBase + "-" + loggingVariables.NormalLogSufix + loggingVariables.DefaultExtensionFile), minimumLevel),
                         sinkMapCountLimit: null,
                         restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
-                        levelSwitch: null)
-                    .WriteTo.Map(
-                        keyPropertyName: loggingVariables.ErrorsLogSufix,
-                        defaultKey: string.Empty,
-                        configure: (name, wt) => wt.File(string.Format(loggingVariables.PathLogBase + "-" + loggingVariables.ErrorsLogSufix + loggingVariables.DefaultExtensionFile), LogEventLevel.Error),
-                        sinkMapCountLimit: null,
-                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error,
                         levelSwitch: null)
                     .CreateLogger();
             })
