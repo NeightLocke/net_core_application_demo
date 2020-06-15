@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SocialGames.TechnicalTest.Games.DTOs.Request;
 using SocialGames.TechnicalTest.Games.Interface;
 
 namespace SocialGames.TechnicalTest.Api.Controllers.V1
@@ -23,7 +24,7 @@ namespace SocialGames.TechnicalTest.Api.Controllers.V1
         [Route("games/{gameId}/play")]
         [MapToApiVersion("1")]
         [HttpPost]
-        public async Task<IActionResult> Play(string gameId)
+        public async Task<IActionResult> Play(string gameId, [FromBody]GamesRequest request)
         {
             _logger.LogInformation(nameof(Play));
             try
