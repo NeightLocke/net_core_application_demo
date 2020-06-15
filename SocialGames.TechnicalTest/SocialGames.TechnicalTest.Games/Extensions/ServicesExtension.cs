@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SocialGames.TechnicalTest.Games.DTOs;
 using SocialGames.TechnicalTest.Games.Implementations.ExternalServices;
 using SocialGames.TechnicalTest.Games.Implementations.MainService;
 using SocialGames.TechnicalTest.Games.Interface.ExternalServices;
@@ -12,6 +13,16 @@ namespace SocialGames.TechnicalTest.Games.Extensions
     {
         public static IServiceCollection AddCustomMainServiceLibraries(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IGamesService, GamesService>();
+            services.AddScoped<IGamesServiceProxyClient, GamesServiceProxyClient>();
+            services.AddScoped<GamesServiceProxyClientConfiguration>((instance) =>
+            {
+                return new GamesServiceProxyClientConfiguration()
+                {
+                    BaseAddressClientConfiguration = configuration.GetSection("GamesServiceProxyClient").GetSection("BaseAddressClientConfiguration").Value
+                };
+            });
+            services.AddSingleton<IWebApiServiceConfigurationLibrary, WebApiServiceConfigurationLibrary>();
             services.AddSingleton<IValidatorProvider, WebApiValidator>();
             services.AddSingleton<IWebApiServiceConfigurationLibrary, WebApiServiceConfigurationLibrary>();
             return services;
