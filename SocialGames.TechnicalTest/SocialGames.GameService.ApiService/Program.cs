@@ -7,6 +7,8 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using SocialGames.TechnicalTest.Games.Extensions;
 
 namespace SocialGames.GameService.ApiService
 {
@@ -26,6 +28,23 @@ namespace SocialGames.GameService.ApiService
                 if (args != null)
                     config.AddCommandLine(args);
             })
+            .ConfigureLogging((webhostingContext, logging) =>
+            {
+                var loggingVariables = webhostingContext.Configuration.AddCustomLoggingVariablesExtension();
+                var minimumLevel = Enum.Parse<Serilog.Events.LogEventLevel>(loggingVariables.MinimumLevel);
+
+                Log.Logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(webhostingContext.Configuration)
+                    .WriteTo.Map(
+                        keyPropertyName: loggingVariables.NormalLogSufix,
+                        defaultKey: string.Empty,
+                        configure: (name, wt) => wt.File(string.Format(loggingVariables.PathLogBase + "-" + loggingVariables.NormalLogSufix + loggingVariables.DefaultExtensionFile), minimumLevel),
+                        sinkMapCountLimit: null,
+                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
+                        levelSwitch: null)
+                    .CreateLogger();
+            })
+            .UseSerilog()
             .UseStartup<Startup>();
     }
 }

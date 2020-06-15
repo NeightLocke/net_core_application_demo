@@ -1,4 +1,4 @@
-﻿namespace SocialGames.TechnicalTest.Games.Interface
+﻿namespace SocialGames.TechnicalTest.Games.Interface.Shared
 {
     public interface IValidatorProvider
     {

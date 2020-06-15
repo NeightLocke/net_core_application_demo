@@ -28,7 +28,7 @@ namespace SocialGames.TechnicalTest.ApiService
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddApiVersioning();
             services.AddCustomSwagger(_apiName);
-            services.AddCustomServices(Configuration);
+            services.AddCustomMainServiceLibraries(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

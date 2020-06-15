@@ -1,6 +1,7 @@
-﻿using SocialGames.TechnicalTest.Games.Interface;
+﻿using SocialGames.TechnicalTest.Games.Interface.Shared;
+using SocialGames.TechnicalTest.Games.Interface.MainService;
 
-namespace SocialGames.TechnicalTest.Games.Implementations
+namespace SocialGames.TechnicalTest.Games.Implementations.MainService
 {
     public class WebApiValidator : IValidatorProvider
     {

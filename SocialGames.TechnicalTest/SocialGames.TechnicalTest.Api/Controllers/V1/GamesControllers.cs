@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SocialGames.TechnicalTest.Games.DTOs.Request;
-using SocialGames.TechnicalTest.Games.Interface;
+using SocialGames.TechnicalTest.Games.Interface.Shared;
 
 namespace SocialGames.TechnicalTest.Api.Controllers.V1
 {

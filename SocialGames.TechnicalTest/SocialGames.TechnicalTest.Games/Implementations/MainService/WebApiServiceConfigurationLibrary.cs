@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SocialGames.TechnicalTest.Games.Interface;
 using SocialGames.TechnicalTest.Games.DTOs;
+using SocialGames.TechnicalTest.Games.Interface.MainService;
 
-namespace SocialGames.TechnicalTest.Games.Implementations
+namespace SocialGames.TechnicalTest.Games.Implementations.MainService
 {
     public class WebApiServiceConfigurationLibrary : IWebApiServiceConfigurationLibrary
     {

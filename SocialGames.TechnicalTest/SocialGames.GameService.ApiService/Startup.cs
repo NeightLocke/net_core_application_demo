@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using SocialGames.TechnicalTest.Games.Extensions;
 
 namespace SocialGames.GameService.ApiService
 {
@@ -34,6 +35,7 @@ namespace SocialGames.GameService.ApiService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = _apiName, Version = "v1" });
             });
+            services.AddCustomGamesDataServiceLibrary(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
