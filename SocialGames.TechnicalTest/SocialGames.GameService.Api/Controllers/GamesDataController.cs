@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SocialGames.TechnicalTest.Games.DTOs.Request;
@@ -29,10 +30,10 @@ namespace SocialGames.GameService.ApiService.Controllers
 
         [HttpPost]
         [Route("Evaluate")]
-        public IActionResult EvaluateGames([FromBody] GamesRequest request)
+        public async Task<IActionResult> EvaluateGames([FromBody] GamesRequest request)
         {
             _logger.LogInformation(nameof(EvaluateGames));
-            var response = _gamesEvaluator.EvaluateGames(request);
+            var response = await _gamesEvaluator.EvaluateGames(request);
             return StatusCode((int)HttpStatusCode.OK, response);
         }
     }

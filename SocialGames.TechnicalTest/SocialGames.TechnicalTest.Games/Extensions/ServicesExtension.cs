@@ -15,7 +15,7 @@ namespace SocialGames.TechnicalTest.Games.Extensions
         {
             services.AddScoped<IGamesService, GamesService>();
             services.AddScoped<IGamesServiceProxyClient, GamesServiceProxyClient>();
-            services.AddScoped<GamesServiceProxyClientConfiguration>((instance) =>
+            services.AddSingleton<GamesServiceProxyClientConfiguration>((instance) =>
             {
                 return new GamesServiceProxyClientConfiguration()
                 {
