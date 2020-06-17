@@ -32,9 +32,17 @@ namespace SocialGames.GameService.ApiService.Controllers
         [Route("Evaluate")]
         public async Task<IActionResult> EvaluateGames([FromBody] GamesRequest request)
         {
-            _logger.LogInformation(nameof(EvaluateGames));
-            var response = await _gamesEvaluator.EvaluateGames(request);
-            return StatusCode((int)HttpStatusCode.OK, response);
+            try
+            {
+                _logger.LogInformation(nameof(GamesDataController) + nameof(EvaluateGames));
+                var response = await _gamesEvaluator.Evaluate(request);
+                return StatusCode((int)HttpStatusCode.OK, response);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(string.Format("Exception in {0} --- Error Message: {1}" + nameof(GamesDataController) + nameof(EvaluateGames), ex.Message));
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
     }
 }

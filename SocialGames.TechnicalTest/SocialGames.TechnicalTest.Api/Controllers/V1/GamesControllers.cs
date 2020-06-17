@@ -29,20 +29,24 @@ namespace SocialGames.TechnicalTest.Api.Controllers.V1
         [HttpPost]
         public async Task<IActionResult> Play(string gameId, [FromBody]GamesRequest request)
         {
-            _logger.LogInformation(nameof(Play));
+            _logger.LogInformation(nameof(GamesControllers) + nameof(Play));
             try
             {
                 if (_validatorProvider.HasValidId(gameId))
                 {
-                    var p = await _gamesService.EvaluateGamesAsync(request);
-                    return Ok(p);
+                    var result = await _gamesService.EvaluateGamesAsync(request);
+                    if (result == null)
+                    {
+                        return StatusCode((int)HttpStatusCode.NoContent);
+                    }
+                    return Ok(result);
                 }
                 return StatusCode((int)HttpStatusCode.NotFound);
             }
             catch (System.Exception ex)
             {
-                _logger.LogError(ex.Message);
-                return StatusCode((int)HttpStatusCode.InternalServerError);
+                _logger.LogError(string.Format("Exception in {0} --- Error Message: {1}" + nameof(GamesControllers) + nameof(Play), ex.Message));
+                return StatusCode((int)HttpStatusCode.InternalServerError, "Internal Server Error");
             }
         }
     }

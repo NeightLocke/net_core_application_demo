@@ -22,6 +22,7 @@ namespace SocialGames.TechnicalTest.Games.Implementations.MainService
 
         public async Task<GamesResponse> EvaluateGamesAsync(GamesRequest request)
         {
+            _logger.LogInformation(nameof(GamesService) + nameof(EvaluateGamesAsync));
             return await _gamesServiceProxyClient.EvaluateGamesAsync(request);
         }
     }

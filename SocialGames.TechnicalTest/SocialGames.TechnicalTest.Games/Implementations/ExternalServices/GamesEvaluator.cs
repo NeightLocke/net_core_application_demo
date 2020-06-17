@@ -23,16 +23,25 @@ namespace SocialGames.TechnicalTest.Games.Implementations.ExternalServices
             _logger = logger;
         }
 
-        public async Task<GamesResponse> EvaluateGames(GamesRequest request)
+        public async Task<GamesResponse> Evaluate(GamesRequest request)
         {
-            var response = new GamesResponse();
-            response.GamesDataCollection = new List<GameSingleDataResponse>();
-            request.Games.ToList().ForEach(game =>
+            try
             {
-                response.GamesDataCollection.Add(GetGameSingleDataResponse(game));
-            });
-            await Task.Delay(500);
-            return response;
+                _logger.LogInformation(nameof(GamesEvaluator) + nameof(Evaluate));
+                var response = new GamesResponse();
+                response.GamesDataCollection = new List<GameSingleDataResponse>();
+                request.Games.ToList().ForEach(game =>
+                {
+                    response.GamesDataCollection.Add(GetGameSingleDataResponse(game));
+                });
+                await Task.Delay(500);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(string.Format("Exception in {0} --- Error Message: {1}" + nameof(GamesEvaluator) + nameof(Evaluate), ex.Message));
+                throw ex;
+            }
         }
 
         private GameSingleDataResponse GetGameSingleDataResponse(string game)

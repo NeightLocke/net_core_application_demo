@@ -27,18 +27,20 @@ namespace SocialGames.TechnicalTest.Games.Implementations.MainService
         {
             try
             {
-                var p = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                var r = await _client.PostAsync("/api/GamesData/Evaluate", p);
-                if (r.IsSuccessStatusCode)
+                _logger.LogInformation(nameof(GamesServiceProxyClient) + nameof(EvaluateGamesAsync));
+                var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                var result = await _client.PostAsync("/api/GamesData/Evaluate", content);
+                if (result.IsSuccessStatusCode)
                 {
-                    var jsonString = await r.Content.ReadAsStringAsync();
+                    var jsonString = await result.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<GamesResponse>(jsonString);
                 }
                 return null;
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(string.Format("Exception in {0} --- Error Message: {1}" + nameof(GamesServiceProxyClient) + nameof(EvaluateGamesAsync), ex.Message));
+                throw ex;
             }
         }
     }

@@ -9,6 +9,6 @@ namespace SocialGames.TechnicalTest.Games.Interface.ExternalServices
 {
     public interface IGamesEvaluator
     {
-        Task<GamesResponse> EvaluateGames(GamesRequest request);
+        Task<GamesResponse> Evaluate(GamesRequest request);
     }
 }
