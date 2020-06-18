@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -34,11 +35,15 @@ namespace SocialGames.TechnicalTest.Api.Controllers.V1
             {
                 if (_validatorProvider.HasValidId(gameId))
                 {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
                     var result = await _gamesService.EvaluateGamesAsync(request);
                     if (result == null)
                     {
                         return StatusCode((int)HttpStatusCode.NoContent);
                     }
+                    stopwatch.Stop();
+                    _logger.LogInformation(Request.Path.Value + " - " + stopwatch.Elapsed);
                     return Ok(result);
                 }
                 return StatusCode((int)HttpStatusCode.NotFound);
