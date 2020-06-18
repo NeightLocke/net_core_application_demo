@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,10 @@ namespace SocialGames.TechnicalTest.Api.Controllers.V1
             _logger.LogInformation(nameof(GamesControllers) + nameof(Play));
             try
             {
+                if (request == null || !request.Games.Any())
+                {
+                    return BadRequest("Request cannot be null");
+                }
                 if (_validatorProvider.HasValidId(gameId))
                 {
                     Stopwatch stopwatch = new Stopwatch();
